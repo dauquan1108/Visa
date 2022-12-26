@@ -30,7 +30,6 @@ import note from '../Img/notes.png';
 const data = [
 	{
 		key: "1",
-
 		device: 'Thiết bị 1', // Post làm
 		workTime: '24/12/2022', // Ngày làm
 		name: "An Giang", // Chủ thẻ
@@ -342,19 +341,6 @@ function Invoice() {
 					>
 						Xóa tìm kiếm
 					</Button>
-					{/*<Button*/}
-					{/*	type="link"*/}
-					{/*	size="small"*/}
-					{/*	onClick={() => {*/}
-					{/*		confirm({*/}
-					{/*			closeDropdown: false*/}
-					{/*		});*/}
-					{/*		setSearchText(selectedKeys[0]);*/}
-					{/*		setSearchedColumn(dataIndex);*/}
-					{/*	}}*/}
-					{/*>*/}
-					{/*	Lọc*/}
-					{/*</Button>*/}
 					<Button
 						type="link"
 						size="small"
@@ -406,13 +392,16 @@ function Invoice() {
 		setDataInvoice(record);
 	};
 
+	const onClickDeleteItem = (id) => {
+		console.log('id: ================>', id); // Log QuanDX fix bug
+	};
+
 
 	const columns = [
 		{
 			title: "Tên thiết bị",
 			dataIndex: "device",
 			key: "device",
-			// width: "12%",
 			...getColumnSearchProps("device", "tên thiết bị"),
 			sorter: (a, b) => a.device.length - b.device.length,
 			sortDirections: ["descend", "ascend"]
@@ -421,13 +410,11 @@ function Invoice() {
 			title: "Ngày làm",
 			dataIndex: "workTime",
 			key: "workTime",
-			// width: "8%"
 		},
 		{
 			title: "Chủ thẻ",
 			dataIndex: "name",
 			key: "name",
-			// width: "15%",
 			...getColumnSearchProps("name", "chủ thẻ"),
 			sorter: (a, b) => a.name.length - b.name.length,
 			sortDirections: ["descend", "ascend"]
@@ -436,49 +423,41 @@ function Invoice() {
 			title: "Số thẻ",
 			dataIndex: "cardNumber",
 			key: "cardNumber",
-			// width: "10%"
 		},
 		{
 			title: "Số tiền",
 			dataIndex: "amountOfMoney",
 			key: "amountOfMoney",
-			// width: "10%"
 		},
 		{
 			title: "% Phí ngân hàng",
 			dataIndex: "bankingFee",
 			key: "bankingFee",
-			// width: "10%"
 		},
 		{
 			title: "Phí ngân hàng",
 			dataIndex: "bankFees",
 			key: "bankFees",
-			// width: "10%"
 		},
 		{
 			title: "% Phí thu khách",
 			dataIndex: "customerCharge",
 			key: "customerCharge",
-			// width: "9%"
 		},
 		{
 			title: "Phí thu",
 			dataIndex: "fees",
 			key: "fees",
-			// width: "10%"
 		},
 		{
 			title: "Lãi",
 			dataIndex: "interestRate",
 			key: "interestRate",
-			// width: "15%"
 		},
 		{
 			title: "Hình thức",
 			key: "tag",
 			dataIndex: "tag",
-			// sorter: (a, b) => a.tag.length - b.tag.length,
 			render: (_, { tag }) => (
 				<>
 					{tag.map((tag) => {
@@ -496,6 +475,7 @@ function Invoice() {
 			title: "Note",
 			Key: "Note",
 			dataIndex: "Note",
+			align: "center",
 			render: (_, record) => (
 				<Space size="middle">
 					<a onClick={() => onClickNote(record)}>
@@ -511,10 +491,12 @@ function Invoice() {
 			render: (_, record) =>
 				data.length >= 1 ? (
 					<Popconfirm
-						title="Sure to delete?"
-						// onConfirm={() => handleDelete(record.key)}
+						okText="Có"
+						cancelText="Không"
+						title="Bạn có chắc muốn xóa ?"
+						onConfirm={() => onClickDeleteItem(record.key)}
 					>
-						<a>Delete</a>
+						<a>Xóa</a>
 					</Popconfirm>
 				) : null
 		},

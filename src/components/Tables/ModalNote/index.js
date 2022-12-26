@@ -25,11 +25,15 @@ function ModalNote({ open, setOpen, dataInvoice }) {
 	const device = dataInvoice.device || "";
 	const workTime = dataInvoice.workTime || "";
 	const name = dataInvoice.name || "";
-	const amountOfMoney = dataInvoice.amountOfMoney || "vnđ";
-	const fees = dataInvoice.fees || "vnđ";
-	const bankFees = dataInvoice.bankFees || "vnđ";
-	const interestRate = dataInvoice.interestRate || "vnđ";
+	const cardNumber = dataInvoice.cardNumber || "";
+	const amountOfMoney = dataInvoice.amountOfMoney || "0 vnđ";
+	const bankingFee =  dataInvoice.bankingFee || "";
+	const bankFees = dataInvoice.bankFees || "0 vnđ";
+	const customerCharge = dataInvoice.customerCharge || "";
+	const fees = dataInvoice.fees || "0 vnđ";
+	const interestRate = dataInvoice.interestRate || "0 vnđ";
 	const note = dataInvoice.note || "";
+	const tag = dataInvoice.tag || "";
 
 	return(
 	    <Modal
@@ -46,10 +50,14 @@ function ModalNote({ open, setOpen, dataInvoice }) {
 		    <p>Tên thiết bị: {device}</p>
 		    <p>Thời gian làm: {workTime}</p>
 		    <p>Chủ thẻ: {name}</p>
+		    <p>Mã số thẻ: {cardNumber}</p>
 		    <p>Số tiền nhận từ khách: {amountOfMoney}</p>
+		    <p>% Phí ngân hàng: {bankingFee} %</p>
 		    <p>Phí thu: {fees}</p>
 		    <p>Phí ngân hàng: {bankFees}</p>
-		    <p>Lãi: {interestRate}</p>
+		    <p>% Phí thu khách: {customerCharge} %</p>
+		    <p>Số tiền lãi: {interestRate}</p>
+		    <p>Hình thức: {tag}</p>
 		    <p>Note: {note}</p>
 	    </Modal>
     );
